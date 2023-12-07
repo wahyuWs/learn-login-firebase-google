@@ -23,13 +23,13 @@ class GoogleAuthClient(
         val result = try {
             oneTapClient.beginSignIn(
                 buildSignInRequest()
-            )
+            ).await()
         } catch (e: Exception) {
             e.printStackTrace()
             if (e is CancellationException) throw e
             null
         }
-        return result?.result?.pendingIntent?.intentSender
+        return result?.pendingIntent?.intentSender
     }
 
     private fun buildSignInRequest(): BeginSignInRequest {
